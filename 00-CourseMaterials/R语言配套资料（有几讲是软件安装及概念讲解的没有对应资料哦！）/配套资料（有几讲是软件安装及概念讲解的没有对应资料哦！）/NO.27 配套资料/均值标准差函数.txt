@@ -1,0 +1,3 @@
+均值标准差函数 <- function(x){
+  paste0(round(mean(x),2), '±', round(sd(x),2))
+}

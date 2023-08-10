@@ -1,0 +1,42 @@
+#1、配对卡方
+#对于频数表的数据，应该选择人matrix的形式录入进R
+a <- c(105, 7, 9, 29)
+a
+a <- matrix(a, 2, 2)
+colnames(a) <- c('A达标', 'A未达标')
+rownames(a) <- c('B达标', 'B未达标')
+#配对卡方检验的函数是CrossTable
+library(gmodels)
+CrossTable(a, mcnemar = TRUE, expected = TRUE)
+#配对卡方P>0.05,意味着两种方法的结果一致，不存在显著差异
+#得出了A和B的检验结果一致的结论后，还需要继续
+#进行KAPPA一致性检验，考察A和B的一致程度
+#KAPPA一致性检验需要用到fmsb程序包中的Kappa.test函数
+library(fmsb)
+Kappa.test(a)
+
+
+
+#2、趋势卡方
+b <- c(85,95,56,85,67,98,16,10,5,9,6,6)
+b
+b <- matrix(b, 6, 2)
+colnames(b) <- c('治愈', '未治愈')
+rownames(b) <- c('25mg', '50mg','75mg','100mg','125mg','150mg')
+CrossTable(b,chisq = TRUE, expected = TRUE)
+#以上交叉表卡方检验得出P=0.256>0.05,意味着不同剂量组之间的治愈率无显著差异
+#组间率没有显著差异并不意味着率不会随着组存在显著趋势。
+#接下，选择趋势卡方检验，考察治愈率对否会随着计量的上升而上升
+#趋势卡方检验需要使用DescTools程序包中的CochraneArmitageTest()函数
+library(DescTools)
+CochranArmitageTest(b)
+#趋势卡方检验得出P=0.029<0.05,意味着趋势显著
+#即治愈率会随着剂量的变化而变化。
+
+
+res <- CrossTable(b,chisq = TRUE, expected = TRUE)
+
+n <- data.frame(matrix(paste0(res$t,'(', round(res$prop.row*100,2),"%)"),6,2))
+colnames(n) <- c('治愈', '未治愈')
+rownames(n) <- c('25mg', '50mg','75mg','100mg','125mg','150mg')
+write.csv(n,'n.csv')

@@ -1,0 +1,78 @@
+########NO.7数据录入代码演示
+#1、键盘手动录入数据
+Patient_ID <- c('NO.1', 'NO.2',
+'NO.3', 'NO.4',
+'NO.5', 'NO.6',
+'NO.7', 'NO.8',
+'NO.9', 'NO.10')#录入字符时务必加英文环境下的''或""
+Patient_ID
+Gender <- c('male', 'male',
+'female', 'female',
+'female', 'female',
+'female', 'female',
+'female', 'male')#录入字符时务必加英文环境下的''或""
+Gender
+Age <- c(67, 67, 60, 69, 80, 63, 55, 66, 47, 62)
+mydata1 <- data.frame(Patient_ID, Gender, Age)
+View(mydata1)
+View(mydata1)
+View(mydata1)
+View(mydata1)
+View(mydata1)
+mydata2 <- data.frame(Patient_ID, gender, Age)
+View(mydata1)
+View(mydata1)
+mydata1 <- data.frame(Patient_ID, Gender, Age)#R是区分大小写的！
+View(mydata1)
+View(mydata1)
+View(mydata1)
+edit(mydata1)
+View(mydata1)
+View(mydata1)
+mydata2 <- edit(mydata1)
+View(mydata2)
+View(mydata2)
+View(mydata1)
+View(mydata1)
+mydata1 <- edit(mydata1)
+View(mydata1)
+View(mydata1)
+#2、txt格式数据的导入
+#导入txt格式数据用到的函数是read.table
+mydata3 <- read.table("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7_txt格式数据导入.txt")
+View(mydata3)
+View(mydata3)
+#2、txt格式数据的导入
+#导入txt格式数据用到的函数是read.table
+mydata3 <- read.table("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7_txt格式数据导入.txt", header = TRUE)
+View(mydata3)
+View(mydata3)
+#重点：R软件不能识别\的路径，R软件只能识别/或者\\的路径
+mydata4 <- read.table("C:\\Users\\Administrator\\Desktop\\NO.7_配套资料\\NO.7_txt格式数据导入.txt", header = TRUE)
+View(mydata4)
+View(mydata4)
+library(readxl)
+NO_7_excel格式数据 <- read_excel("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7_excel格式数据.xls")
+View(NO_7_excel格式数据)
+#3、excel格式数据的导入（既可以通过代码，也可以通过鼠标点击）
+#导入excel格式数据用到的函数是read_excel，这个函数所在的程序包readxl不是R自带的，
+#因此，使用之前需要install，然后在library。
+mydata5 <- NO_7_excel格式数据
+View(mydata5)
+View(mydata5)
+mydata5$性别 <- factor(mydata5$性别, levels = c(1,2), labels = c('男', '女'))
+#4、csv格式数据的导入（只能通过代码，不能通过鼠标点击）
+#导入csv格式数据用到的函数是read.csv，这个函数所在utils程序包是R自带的
+mydata6 <- read.csv('C:\\Users\\Administrator\\Desktop\\NO.7_配套资料\\NO.7_csv格式数据.csv')
+View(mydata6)
+View(mydata6)
+library(haven)
+NO_7_SPSS格式数据 <- read_sav("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7_SPSS格式数据.sav")
+View(NO_7_SPSS格式数据)
+View(NO_7_SPSS格式数据)
+#5、SPSS格式数据的导入（既能通过代码，也能通过鼠标点击）
+mydata7 <- NO_7_SPSS格式数据
+View(mydata7)
+View(mydata7)
+save.image("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7代码保存/NO.7数据环境.RData")
+savehistory("C:/Users/Administrator/Desktop/NO.7_配套资料/NO.7代码保存/NO.7运算历史")

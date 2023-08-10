@@ -1,0 +1,159 @@
+#######NO.2演示代码#######
+(((1+2)^3+21)*12)/(1+1.6)
+age <- c(11,25,62,23)
+age
+BMI <- c(18.4,21.2,28.6,22.7)
+cor.test(age, BMI)
+plot(age, BMI)  #绘制散点图
+
+
+
+#######NO.3程序包的安装######
+#下载并安装rms程序包
+install.packages("rms")  #下载并安装rms程序包，下载并安装的操作只用操作一次即可。 
+library(rms)  #针对已经下载安装好了的程序包，进行调用。每次使用都需要进行一次调用。
+
+
+#######NO.4演示代码#####
+#第1部分：赋值
+age <- c(21, 22.3, 23, 19.8, 22.9, 20)
+BMI <- c(20.3, 19.5, 19.8, 21.2, 22.3, 19.6)
+student_ID <- c('NO.1', 'NO.2', 'NO.3', 'NO.4','NO.5', 'NO.6')
+data.frame(student_ID, age, BMI)
+mydata <- data.frame(student_ID, age, BMI)
+mydata
+#第2部分：四则运算
+2+3
+56-23
+12*25
+12/6
+72/10   #取整%/%,取余%%
+72 %/% 10
+72%%10
+ceiling(7.2)
+floor(7.2)
+5 ^ 2
+5 ** 2
+6^3
+sqrt(100)
+sqrt(25)
+sqrt(64)
+#第3部分：三角函数的运算
+#三角函数输入的数据是弧度，180°=π弧度，1°=π/180弧度
+sin(pi/180*30)
+sin(pi/180*60)
+cos(pi/180*45)
+tan(pi/180*45)
+#第4部分：对数函数log(x, base=10)
+log(100, base = 10)
+log(64, base = 8)
+log(125, base = 5)
+log(25)  #如果省略base，默认底数base是e=2.718282
+#log(x)=ln(x)
+#第5部分：指数函数exp(x)
+exp(1)
+exp(2)
+log(exp(3.7))
+exp(1)
+log(exp(1))
+#第6部分：简单统计运算
+mydata
+mean(age)
+sd(age)
+var(age)
+range(age)
+median(age)
+quantile(age)
+max(age)
+min(age)
+#第7部分：绝对值、四舍五入
+abs(-3)
+abs(5)
+pi
+round(pi,2)
+#第8部分：比较大小
+#大于（>），大于等于(>=)，小于(<)，小于等于(<=)，等于（==），不等于（!=）
+5 > 4
+6 > 8
+9 >= 12
+9 >= 9
+2 < 3
+10 <= 10
+2 == 2
+2 == 3
+2 = 3
+a = 2
+a <- 2
+a
+b <- 6
+b
+2 != 3
+4 != 4
+#第9部分：且（&）、或（|）、非（!）
+3 > 2 & 5 > 6
+3 > 2 & 5 < 6
+3 > 2 | 5 > 6
+3 < 2 | 5 > 6
+3 > 10
+!(3 > 10)
+
+
+
+#######NO.5数据类型介绍####
+#1、向量vector
+age  #数值型向量
+bmi  #R语言区分大小写！
+BMI
+gender <- c("female", "male", "female", "female", "male", "male")
+gender  #字符型向量
+selected <- ifelse(BMI > 20, TRUE, FALSE)
+selected  #逻辑型向量
+#2、数据框data.frame
+#形成数据框的函数data.frame
+mydata2 <- data.frame(mydata, gender, selected)
+#3、向量和数据框中元素的调用
+mydata2[4,'selected'] #数据框元素调用的规则mydata2[行，列]
+mydata2[4,5]
+mydata[,3]
+mydata2[,'BMI']
+mydata2[2,]
+mydata2[,-3]
+mydata2[-1,]
+mydata2[c(1,3,5),]
+mydata2[,c(1:3)]
+#数据框是面，是二维的，包括行和列，所调用元素必须给出行和列的信息。
+#向量是线，是一维的。var[]
+age
+age[3]
+age[-1]
+age[-c(1,3,4)]
+#4、矩阵matrix
+5*6
+samp <- matrix(1:30,nrow = 5,ncol = 6)
+samp
+samp[2,4]
+colnames(samp) <- c('col_1', 'col_2', 'col_3', 'col_4', 'col_5', 'col_6')
+samp
+#5、列表list
+#列表的包容性很强，是一个大杂烩。
+a
+
+mylist <- list(mydata, a, gender, selected,samp)
+mylist
+names(mylist) <- c('mydata', 'a', 'gender', 'selected', 'samp')
+mylist
+mylist$mydata[3,2]
+mylist$selected[5]
+mylist$samp[2,4]
+#6、什么时候加""，也可以使用''，不过""更严谨。
+#录入内容是字符串的时候，必须要加""
+p <- 23.36259
+p*2
+p*4
+sqrt(p)
+k <- "参加"
+k
+
+
+
+

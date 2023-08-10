@@ -1,0 +1,27 @@
+library(readxl)
+mydata <- read_excel("C:/Users/Administrator/Desktop/NO.11 配套资料/NO.11数据.xls")
+View(mydata)
+mydata$性别 <- factor(mydata$性别, levels = c(1,2), labels = c('男','女'))
+summary(mydata$性别)
+#1、计算变量    以计算BMI为例
+#BMI = 体重（KG）/（身高m*身高m）
+mydata$身高 <- mydata$身高/100
+View(mydata)
+mydata$BMI <- mydata$体重/(mydata$身高*mydata$身高)
+install.packages("car")
+#2、变量的重新编码
+#问卷的Q10属于逆向题，为了和维度中其他题项的方向保持一致
+#因此，需要对Q10进行逆向处理。
+#原来的12345要转码成54321
+#逆向的重新编码需要用到的函数是recode,这个函数所在的程序包是car程序包
+library(car)
+mydata$Q10_逆 <- recode(mydata$Q10, "1 = 5; 2 = 4; 3 = 3; 4 = 2; 5 = 1")
+#3、数据框中列的位置的调整
+mydata <- mydata[,c(1:14, 26, 15:25)]
+mydata$行为不当得分 <- (mydata$Q1+mydata$Q8+mydata$Q10_逆+mydata$Q14+mydata$Q16+mydata$Q19)/6
+mydata$BMI分类[mydata$BMI < 18.5] <- '偏瘦'
+mydata$BMI分类[mydata$BMI < 24 & mydata$BMI >= 18.5] <- '正常'
+mydata$BMI分类[mydata$BMI < 28 & mydata$BMI >= 24] <- '偏胖'
+mydata$BMI分类[mydata$BMI >= 28] <- '肥胖'
+save.image("C:/Users/Administrator/Desktop/NO.11 环境.RData")
+savehistory("C:/Users/Administrator/Desktop/NO.11 历史")
